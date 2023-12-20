@@ -23,8 +23,8 @@
 <!-- //font-awesome icons -->
 <link href="http://fonts.googleapis.com/css?family=Cabin+Condensed:400,500,600,700" rel="stylesheet">
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<script src="https://echarts-maps.github.io/echarts-china-counties-js/echarts.min.js"></script>
-<script src="https://echarts-maps.github.io/echarts-china-counties-js/china.js"></script>
+<script src="js/echarts.min.js"></script>
+<script src="js/china.js"></script>
 </head>
 	
 <body>
@@ -112,7 +112,7 @@
 <!-- banner-bottom -->
 	<div id="about" class="banner-bottom"></div>
 		<div class="container">
-			<div id="china" style="width: 600px; height: 600px; border: 2px solid rgb(204, 204, 204);border-radius: 10px;overflow: hidden;margin: 20px auto; user-select: none; background: rgb(197, 214, 231);" _echarts_instance_="ec_1702823959809">
+			<div id="china" style="width: 1000px; height: 600px;border-radius: 10px;overflow: hidden;margin: 20px auto; user-select: none;" _echarts_instance_="ec_1702823959809">
 				<div>
 					<canvas></canvas>
 				</div>
@@ -601,7 +601,7 @@
 	const map = {"四川":"si4chuan1","重庆":"zhi2xia2shi4"};
 	const achart = echarts.init(document.getElementById("china"));
 	var option =  {
-	  "backgroundColor": "#c5d6e7", 
+	  "backgroundColor": "#E5D3AA", 
 	  "title": [
 		{
 		  "textStyle": {
@@ -611,10 +611,6 @@
 		  "subtext": "",
 		  "text": "",
 		  "top": "auto",
-		  "subtextStyle": {
-			"color": "#aaa",
-			"fontSize": 10
-		  },
 		  "left": "auto"
 		}
 	  ],
@@ -630,12 +626,23 @@
 		  "show": true
 		}
 	  ],
+	  "visualMap": {
+		"type": "piecewise",
+		"pieces": [
+		{value: 0, label: '其他', color: '#F9F4DC'},
+		{value: 1, label: '已开启合作区域', color: '#1A6840'}
+		],
+		"seriesIndex": 0,
+		"orient": "horizontal",
+		"bottom": 10,
+		"left": "center"
+	},
 	  "series": [
 		{
 		  "mapType": "china",
 		  "data": [
-			  { name: '四川', selected: true },
-			  { name: '重庆', selected: true },
+			{ name: '四川', selected: true },
+        	{ name: '重庆', selected: true },
 		  ],
 		  "name": "",
 		  "symbol": "circle",
@@ -645,7 +652,16 @@
 			"normal": {
 			  "show": true
 			}
-		  }
+		  },
+		  "itemStyle": {
+			"normal": {
+          	"areaColor": '#F9F4DC', // 未高亮区域的颜色
+          	"borderColor": '#fff'    // 区域边界颜色
+        	},
+        	"emphasis": {
+          		"areaColor": "#1A6840"  // 高亮时的颜色
+        	}
+		}
 		}
 	  ]
 	};
